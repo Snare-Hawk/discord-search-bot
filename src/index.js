@@ -108,27 +108,27 @@ client.on("messageCreate", async message => {
         ]
     });
 
-    if (command !== "help") {
-        deleteViaReaction(
-            message,
-            await replyEmbed,
-            replyUrl ? await replyUrl : replyUrl,
-            client
-        );
-    }
+    // if (command !== "help") {
+    //     deleteViaReaction(
+    //         message,
+    //         await replyEmbed,
+    //         replyUrl ? await replyUrl : replyUrl,
+    //         client
+    //     );
+    // }
 });
 
 const help = {
     title: "Commands",
     description: `
-Search anime: !a or !anime <anime title>
-Search manga: !m or !manga <manga title>
-Search character: !c or !character <character name>
-Search staff: !p or !person or !staff <staff name>
-Search studio: !s or !studio <studio name>
-Search user: !u or !user <user name>
+Search anime: %a or %anime <anime title>
+Search manga: %m or %manga <manga title>
+Search character: %c or %character <character name>
+Search staff: %p or %person or %staff <staff name>
+Search studio: %s or %studio <studio name>
+Search user: %u or %user <user name>
 
-GitHub: https://github.com/AniList/AniList-Discord-Bot`
+GitHub: https://github.com/Snare-Hawk/discord-search-bot`
 };
 
 client.login(process.env.TOKEN);
