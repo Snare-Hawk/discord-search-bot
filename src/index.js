@@ -29,6 +29,7 @@ client.on("ready", () => {
     console.log(
         `\nAdd the bot to your server here:\nhttps://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=1024`
     );
+    client.user.setActivity("Spy X Family", { type: "WATCHING" });
 });
 
 client.on("messageCreate", async message => {
@@ -51,6 +52,11 @@ client.on("messageCreate", async message => {
     switch (command) {
         case "help":
             response = help;
+            break;
+
+        case "invite":
+        case "i":
+            response = invite;
             break;
 
         case "a":
@@ -127,8 +133,14 @@ Search character: %c or %character <character name>
 Search staff: %p or %person or %staff <staff name>
 Search studio: %s or %studio <studio name>
 Search user: %u or %user <user name>
+Invite link: %i or %invite
 
-GitHub: https://github.com/Snare-Hawk/discord-search-bot`
+[Source](https://github.com/Snare-Hawk/discord-search-bot)`
+};
+
+const invite = {
+    title: "Invite",
+    description: `You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=883945081856479252&scope=bot&permissions=1024)!`
 };
 
 client.login(process.env.TOKEN);
