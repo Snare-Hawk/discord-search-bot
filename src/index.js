@@ -89,6 +89,9 @@ client.on("messageCreate", async message => {
         case "user":
             response = await user.search(args);
             break;
+        case "anya":
+            response = anya;
+            break;
     }
 
     if (response === null) return;
@@ -141,6 +144,14 @@ Invite link: %i or %invite
 const invite = {
     title: "Invite",
     description: `You can invite me [here](https://discordapp.com/oauth2/authorize?client_id=883945081856479252&scope=bot&permissions=1024)!`
+};
+
+const anya = {
+    title: "anya forger",
+    image: {
+        url:
+            "https://cdn.discordapp.com/app-assets/883945081856479252/1027398078522740737.png"
+    }
 };
 
 client.login(process.env.TOKEN);
