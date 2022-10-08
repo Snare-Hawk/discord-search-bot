@@ -147,7 +147,7 @@ const invite = {
 };
 
 const anya = {
-    title: "anya forger",
+    title: "waku waku",
     image: {
         url:
             "https://cdn.discordapp.com/app-assets/883945081856479252/1027398078522740737.png"
