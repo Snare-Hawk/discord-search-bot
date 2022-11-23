@@ -41,9 +41,9 @@ client.once(Events.ClientReady, () => {
         `\nhttps://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`
     );
     /*
-    const channel = client.channels.cache.get("975876824972283944");
+    const channel = client.channels.cache.get("997182942759628833");
     channel.send(
-        "watch kaguya i guess!"
+        "we back"
     );
     */
 });
