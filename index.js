@@ -12,6 +12,7 @@ const { token } = require("./config.json");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.commands = new Collection();
+
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
     .readdirSync(commandsPath)
@@ -20,7 +21,14 @@ const commandFiles = fs
 for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath);
-    client.commands.set(command.data.name, command);
+    // Set a new item in the Collection with the key as the command name and the value as the exported module
+    if ("data" in command && "execute" in command) {
+        client.commands.set(command.data.name, command);
+    } else {
+        console.log(
+            `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
+        );
+    }
 }
 
 client.once(Events.ClientReady, () => {
@@ -29,14 +37,36 @@ client.once(Events.ClientReady, () => {
         activities: [{ name: "Spy X Family", type: ActivityType.Watching }],
         status: "dnd"
     });
+    console.log(
+        `\nhttps://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=8`
+    );
+    /*
+    const channel = client.channels.cache.get("975876824972283944");
+    channel.send(
+        "his sanity depends on it! https://cdn.discordapp.com/attachments/666436193898201109/1044800221307228250/image.png"
+    );*/
+});
+
+client.on(Events.InteractionCreate, interaction => {
+    console.log(interaction);
+});
+
+client.on(Events.InteractionCreate, interaction => {
+    if (!interaction.isChatInputCommand()) return;
+    console.log(interaction);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
 
-    const command = client.commands.get(interaction.commandName);
+    const command = interaction.client.commands.get(interaction.commandName);
 
-    if (!command) return;
+    if (!command) {
+        console.error(
+            `No command matching ${interaction.commandName} was found.`
+        );
+        return;
+    }
 
     try {
         await command.execute(interaction);
@@ -87,7 +117,7 @@ client.on("ready", () => {
 
     // const channel = client.channels.cache.get("975876824972283944");
 
-    // channel.send("Watch Spy X Family!");
+    // channel.send("let <@301082610438897664> know if at any point you see me in the slash command menu!");
 });
 
 client.on("messageCreate", async message => {
