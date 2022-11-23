@@ -43,8 +43,9 @@ client.once(Events.ClientReady, () => {
     /*
     const channel = client.channels.cache.get("975876824972283944");
     channel.send(
-        "his sanity depends on it! https://cdn.discordapp.com/attachments/666436193898201109/1044800221307228250/image.png"
-    );*/
+        "watch kaguya i guess!"
+    );
+    */
 });
 
 client.on(Events.InteractionCreate, interaction => {
